@@ -27,8 +27,5 @@ module.exports = (app) => {
     });
 
     // deleting note by unique id
-    app.delete('/api/notes/:id', (req, res) => {
-        
-    });
 
 };
