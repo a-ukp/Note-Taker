@@ -1,14 +1,17 @@
 // declare dependencies
 const express = require ('express');
-const fs = require ('fs');
+// const fs = require ('fs');
 const path = require ('path');
 
 // initialize express app
 const app = express();
 
-// middleware to access other files
+// middleware to connect to html files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// body parser for put & post requests
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 // communicate with route file for api and html
 require('./routes')(app);
