@@ -1,4 +1,5 @@
 const fs = require ('fs');
+const uuid = require ('uuid');
 
 module.exports = (app) => {
     // html routing
@@ -8,10 +9,26 @@ module.exports = (app) => {
     app.get ('*'), (req, res) => res.sendFile(path.join(__dirname, 'public/index.html'));
 
     // api routing
-    const noteFile = JSON.parse(fs.readFileSync('./db/db.json'));
-
+    // reads json file at /api/notes
     app.get('/api/notes', (req, res) => {
         return res.json(noteFile);
+    });
+
+    const noteFile = JSON.parse(fs.readFileSync('./db/db.json'));
+
+    // add new note
+    app.post('/api/notes', (req, res) => {
+        const newnote = req.body;
+        //  generates unique id for each note generated
+        newnote.id = uuid.v4();
+        noteFile.push(newnote);
+        fs.writeFileSync('./db/db.json', JSON.stringify(noteFile));
+        res.json(noteFile);
+    });
+
+    // deleting note by unique id
+    app.delete('/api/notes/:id', (req, res) => {
+        
     });
 
 };
