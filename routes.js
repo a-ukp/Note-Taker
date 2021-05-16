@@ -7,7 +7,7 @@ module.exports = (app) => {
     app.get ('/notes', (req,res) => res.sendFile(path.join(__dirname, 'public/notes.html')));
 
     app.get ('*'), (req, res) => res.sendFile(path.join(__dirname, 'public/index.html'));
-    
+
     // api routing
     // reads json file at /api/notes
     app.get('/api/notes', (req, res) => {
@@ -27,5 +27,4 @@ module.exports = (app) => {
     });
 
     // deleting note by unique id
-
 };
