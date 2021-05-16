@@ -18,7 +18,7 @@ app.use(express.urlencoded({extended: false}));
 require('./routes')(app);
 
 // check for available port first before running on 8000
-const PORT = process.env.port || 8000;
+const PORT = process.env.PORT || 8000;
 
 // listen command
 app.listen(PORT, () => console.log(`Listening to server on http://localhost:${PORT}`));
